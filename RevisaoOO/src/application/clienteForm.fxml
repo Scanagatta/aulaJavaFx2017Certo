@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ClienteController">
+   <children>
+      <Pane style="-fx-border-color: #666;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TextField fx:id="tfNome" layoutX="153.0" layoutY="74.0" prefHeight="25.0" prefWidth="312.0" />
+            <Label layoutX="104.0" layoutY="78.0" text="Nome:" />
+            <Label layoutX="110.0" layoutY="110.0" text="CPF:" />
+            <TextField fx:id="tfCPF" layoutX="152.0" layoutY="106.0" />
+            <DatePicker fx:id="dtDataNascimento" layoutX="153.0" layoutY="149.0" />
+            <Label layoutX="51.0" layoutY="153.0" text="Data Nascimento:" />
+            <Button fx:id="btnSalvar" layoutX="145.0" layoutY="238.0" mnemonicParsing="false" onAction="#onSalvar" text="Salvar" textFill="#17ea07" />
+            <Label layoutX="43.0" layoutY="20.0" text="Cadastro de Cliente">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <ListView fx:id="lvCliente" layoutX="133.0" layoutY="274.0" onMouseClicked="#onEditar" prefHeight="200.0" prefWidth="200.0" />
+            <Button fx:id="btnExcluir" layoutX="278.0" layoutY="238.0" mnemonicParsing="false" onAction="#onExcluir" text="Excluir" textFill="#ea0808" />
+            <ComboBox fx:id="cbxAgencia" layoutX="151.0" layoutY="188.0" prefWidth="150.0" />
+            <Label layoutX="23.0" layoutY="192.0" text="Agência de preferência:" />
+            <Button fx:id="btnNovo1" layoutX="211.0" layoutY="238.0" mnemonicParsing="false" onAction="#onNovo" text="Novo" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
