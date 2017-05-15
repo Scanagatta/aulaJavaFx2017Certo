@@ -1,9 +1,10 @@
 package br.edu.unoesc.revisaoOO.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalculadoraSaldo {
+public class CalculadoraSaldo implements Serializable {
 
 	private List<Conta> contas;
 

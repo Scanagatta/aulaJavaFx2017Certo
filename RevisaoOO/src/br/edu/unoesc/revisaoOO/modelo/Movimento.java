@@ -1,7 +1,12 @@
 package br.edu.unoesc.revisaoOO.modelo;
 
-public class Movimento {
+import java.io.Serializable;
+
+public class Movimento implements Serializable {
 	
+
+	private static final long serialVersionUID = 3285007639881937303L;
+
 	private Double valor;
 
 	private String tipo;

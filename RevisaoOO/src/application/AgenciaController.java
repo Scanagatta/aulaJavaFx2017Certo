@@ -64,6 +64,8 @@ public class AgenciaController {
 		agencia.setNumero(tfNumero.getText());
 
 		if (editando) {
+			// quando fizer isso esse metodo vai ser executado na Agencias e atualiza o arquivo
+			SimuladorBD.atualizarAgencias();
 			tblAgencia.refresh(); //atualiza
 		} else {
 			SimuladorBD.insert(agencia);

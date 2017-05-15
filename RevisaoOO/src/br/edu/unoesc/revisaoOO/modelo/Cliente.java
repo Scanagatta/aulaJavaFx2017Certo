@@ -1,9 +1,12 @@
 package br.edu.unoesc.revisaoOO.modelo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Cliente {
+public class Cliente implements Serializable {
 	
+
+	private static final long serialVersionUID = -7286237298218534906L;
 	private String cpf;
 	private String nome;
 	private LocalDate dataNascimento;

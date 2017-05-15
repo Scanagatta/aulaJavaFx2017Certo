@@ -1,5 +1,7 @@
 package application;
 
+import br.edu.unoesc.componente.ListCellBean;
+import br.edu.unoesc.componente.StringConverterBean;
 import br.edu.unoesc.revisaoOO.modelo.Agencia;
 import br.edu.unoesc.revisaoOO.modelo.Cliente;
 import br.edu.unoesc.revisaoOO.modelo.SimuladorBD;
@@ -56,6 +58,11 @@ public class ClienteController {
     @FXML 
     public void initialize() {
     	lvCliente.setItems(FXCollections.observableArrayList(SimuladorBD.getClientes()));
+    	
+    	cbxAgencia.setCellFactory((comboBox)-> {return new ListCellBean<Agencia>();});
+    	
+    	cbxAgencia.setConverter(new StringConverterBean<>());
+    	
     	cbxAgencia.setItems(FXCollections.observableArrayList(SimuladorBD.getAgencias()));
     	novo();
     }
@@ -72,8 +79,10 @@ public class ClienteController {
     	//pega do combobox e guarda no objeto agencia
     	cliente.setAgenciaPreferencial(cbxAgencia.getValue());
     	if(editando){
+    		SimuladorBD.atualizarClientes();
     		lvCliente.refresh();
     	} else {
+    
     		SimuladorBD.insert(cliente);
     		lvCliente.getItems().add(cliente);
     	}

@@ -157,6 +157,7 @@ public class MovimentosController {
 			if (depositando || sacando) {
 
 				if (editando) {
+					SimuladorBD.atualizarMovimentos();
 					tblMovimentos.refresh(); // atualiza
 
 				} else {

@@ -84,10 +84,11 @@ public class ContaController {
 	    @FXML
 	    void onExcluir(ActionEvent event) {
 
-			
+	    	
 			tblConta.getItems().remove(conta);
 			SimuladorBD.remover(conta);
 			limparCampos();
+			
 	    }
 
 
@@ -106,6 +107,7 @@ public class ContaController {
 			conta.setClientePreferencial(cbxCliente.getValue());
 
 			if (editando) {
+				SimuladorBD.atualizarContas();
 				tblConta.refresh(); //atualiza
 			} else {
 				SimuladorBD.insert(conta);
