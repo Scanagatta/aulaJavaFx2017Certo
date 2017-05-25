@@ -1,11 +1,16 @@
 package application;
 
+import java.util.Optional;
+
 import br.edu.unoesc.revisaoOO.modelo.Agencia;
 import br.edu.unoesc.revisaoOO.modelo.SimuladorBD;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -110,9 +115,24 @@ public class AgenciaController {
 	@FXML
 	void onExcluir(ActionEvent MouseEvent) {
 		
+		Alert alerta = new Alert(AlertType.CONFIRMATION,
+				"Deseja relamente excluir?",
+				ButtonType.CANCEL, ButtonType.OK);
+		
+		//Desativando o comportamento padrao não é obrigatorio
+		Button okButton = (Button) alerta.getDialogPane()
+				.lookupButton(ButtonType.OK);
+		okButton.setDefaultButton(false);
+		
+		//optional do java 8 executa o show e fica aguardando o click do botao
+		final Optional<ButtonType> result = alerta.showAndWait();
+		//se o click foi no ok executa os comandos abaixo
+		if(result.get() == ButtonType.OK){
+		
 		tblAgencia.getItems().remove(agencia);
 		SimuladorBD.remover(agencia);
 		limparCampos();
+		}
 	}
 
 }
