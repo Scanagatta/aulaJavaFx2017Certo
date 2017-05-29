@@ -26,6 +26,12 @@ public class MenuController {
     @FXML
     private MenuItem miMovimentos;
     
+    private MenuPrincipal main;
+    
+    public void setMain(MenuPrincipal main){
+    	this.main= main;
+    }
+    
     @FXML
     void onAgencia(ActionEvent event) {
     	FXMLLoader loader = new FXMLLoader();
@@ -44,10 +50,14 @@ public class MenuController {
     void onCliente(ActionEvent event) {
     	FXMLLoader loader = new FXMLLoader();
     	loader.setLocation(getClass().getResource("clienteForm.fxml"));
+    	
     	try{
     		AnchorPane agenciaView = (AnchorPane) loader.load();
     		bpPrincipal.setCenter(agenciaView);
     		
+        	ClienteController clienteController = loader.getController();
+        	clienteController.setMain(main);
+        	
     	} catch (IOException e1) {
     		e1.printStackTrace();
     	}

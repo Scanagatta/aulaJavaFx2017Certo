@@ -52,7 +52,14 @@ public class ClienteController {
     @FXML
     private ComboBox<Agencia> cbxAgencia;
     
+    @FXML
+    private Button btnNovaAgencia;
     
+    private MenuPrincipal main;
+    
+    public void setMain(MenuPrincipal main){
+    	this.main = main;
+    }
     
     //sempre tem que dar initialize
     @FXML 
@@ -67,7 +74,16 @@ public class ClienteController {
     	novo();
     }
     
-    //ação do botao salvar, vai adicionar os nomes na lista
+    @FXML
+    public void onNovaAgencia (ActionEvent event){
+    	boolean salvarClicked = main.showAgenciaDialogEditDialog();
+    	if(salvarClicked){
+    		cbxAgencia.getItems().clear();
+    		cbxAgencia.getItems().addAll(SimuladorBD.getAgencias());
+    	}
+    }
+    
+    //aï¿½ï¿½o do botao salvar, vai adicionar os nomes na lista
     @FXML
     void onSalvar(ActionEvent event) {
  
@@ -113,7 +129,7 @@ public class ClienteController {
     @FXML
     //intercepta o clipe do mouse e popula os nomes da tela
     //lista de cliente
-    //objeto cliente já populado
+    //objeto cliente jï¿½ populado
     void onEditar(MouseEvent mouseEvent) {
     	if(mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED));
     	
