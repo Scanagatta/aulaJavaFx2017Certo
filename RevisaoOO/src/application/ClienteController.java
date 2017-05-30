@@ -19,6 +19,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class ClienteController {
 
@@ -55,11 +56,8 @@ public class ClienteController {
     @FXML
     private Button btnNovaAgencia;
     
-    private MenuPrincipal main;
+
     
-    public void setMain(MenuPrincipal main){
-    	this.main = main;
-    }
     
     //sempre tem que dar initialize
     @FXML 
@@ -76,7 +74,13 @@ public class ClienteController {
     
     @FXML
     public void onNovaAgencia (ActionEvent event){
-    	boolean salvarClicked = main.showAgenciaDialogEditDialog();
+    	
+    	Stage stageDono = (Stage)btnNovaAgencia.getScene().getWindow();
+    	AgenciaDialogFabrica agenciaDialogFabrica = 
+    			new AgenciaDialogFabrica(stageDono);
+    	
+    	boolean salvarClicked = agenciaDialogFabrica.showAgenciaDialogEditDialog();
+    	
     	if(salvarClicked){
     		cbxAgencia.getItems().clear();
     		cbxAgencia.getItems().addAll(SimuladorBD.getAgencias());
