@@ -6,6 +6,10 @@ import java.util.List;
 
 public class CalculadoraSaldo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<Conta> contas;
 
 	public CalculadoraSaldo() {
@@ -25,7 +29,7 @@ public class CalculadoraSaldo implements Serializable {
 			saldo += conta.getSaldo();
 		}
 		// JAVA 8
-		// return contas.stream().mapToDouble(Conta::getSaldo).sum(); //ISTO É
+		// return contas.stream().mapToDouble(Conta::getSaldo).sum(); //ISTO ï¿½
 		// UM LAMBDA
 		return saldo;
 	}
