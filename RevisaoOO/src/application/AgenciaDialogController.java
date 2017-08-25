@@ -2,6 +2,8 @@ package application;
 
 import br.edu.unoesc.revisaoOO.modelo.Agencia;
 import br.edu.unoesc.revisaoOO.modelo.SimuladorBD;
+import dao.AgenciaDao;
+import dao.DaoFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,6 +30,8 @@ public class AgenciaDialogController {
 	
 	private boolean salvarClicked = false;
 
+	private static AgenciaDao agenciaDao = DaoFactory.get().agenciaDao();
+	
 	@FXML
 	public void initialize() {
 
@@ -40,7 +44,7 @@ public class AgenciaDialogController {
 		agencia.setNome(tfNome.getText());
 		agencia.setNumero(tfNumero.getText());
 
-		SimuladorBD.insert(agencia);
+		agenciaDao.inserir(agencia);
 		salvarClicked = true;
 		stageDialog.close();
 

@@ -10,6 +10,7 @@ public class Cliente implements Serializable {
 	private String cpf;
 	private String nome;
 	private LocalDate dataNascimento;
+	private Long codigo;
 	
 	private Agencia agenciaPreferencial;
 	
@@ -60,6 +61,14 @@ public class Cliente implements Serializable {
 
 	public void setAgenciaPreferencial(Agencia agenciaPreferencial) {
 		this.agenciaPreferencial = agenciaPreferencial;
+	}
+
+	public Long getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
 	
 	

@@ -4,7 +4,9 @@ import br.edu.unoesc.componente.ListCellBean;
 import br.edu.unoesc.componente.StringConverterBean;
 import br.edu.unoesc.revisaoOO.modelo.Agencia;
 import br.edu.unoesc.revisaoOO.modelo.Cliente;
-import br.edu.unoesc.revisaoOO.modelo.SimuladorBD;
+import dao.AgenciaDao;
+import dao.ClienteDao;
+import dao.DaoFactory;
 import javafx.collections.FXCollections;
 
 //DA OS ID NO SCECEBUILDER
@@ -57,18 +59,20 @@ public class ClienteController {
     private Button btnNovaAgencia;
     
 
+    private ClienteDao clienteDao = DaoFactory.get().clienteDao();
+    private AgenciaDao agenciaDao = DaoFactory.get().agenciaDao();
     
     
     //sempre tem que dar initialize
     @FXML 
     public void initialize() {
-    	lvCliente.setItems(FXCollections.observableArrayList(SimuladorBD.getClientes()));
+    	lvCliente.setItems(FXCollections.observableArrayList(clienteDao.listar()));
     	
     	cbxAgencia.setCellFactory((comboBox)-> {return new ListCellBean<Agencia>();});
     	
     	cbxAgencia.setConverter(new StringConverterBean<>());
     	
-    	cbxAgencia.setItems(FXCollections.observableArrayList(SimuladorBD.getAgencias()));
+    	cbxAgencia.setItems(FXCollections.observableArrayList(agenciaDao.listar()));
     	novo();
     }
     
@@ -83,7 +87,7 @@ public class ClienteController {
     	
     	if(salvarClicked){
     		cbxAgencia.getItems().clear();
-    		cbxAgencia.getItems().addAll(SimuladorBD.getAgencias());
+    		cbxAgencia.getItems().addAll(agenciaDao.listar());
     	}
     }
     
@@ -98,12 +102,12 @@ public class ClienteController {
     	cliente.setDataNascimento(dtDataNascimento.getValue());
     	//pega do combobox e guarda no objeto agencia
     	cliente.setAgenciaPreferencial(cbxAgencia.getValue());
+    	
     	if(editando){
-    		SimuladorBD.atualizarClientes();
+    		clienteDao.alterar(cliente);
     		lvCliente.refresh();
     	} else {
-    
-    		SimuladorBD.insert(cliente);
+    		clienteDao.inserir(cliente);
     		lvCliente.getItems().add(cliente);
     	}
     	novo();
@@ -150,7 +154,7 @@ public class ClienteController {
 	void onExcluir(ActionEvent MouseEvent) {
 		
 		lvCliente.getItems().remove(cliente);
-		SimuladorBD.remover(cliente);
+		clienteDao.excluir(cliente.getCodigo());
 		limparCampos();
 	}
 }

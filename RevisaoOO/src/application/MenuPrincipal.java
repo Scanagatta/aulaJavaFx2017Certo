@@ -9,13 +9,11 @@ import javafx.stage.Stage;
 public class MenuPrincipal extends Application {
 
 
-	
 
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
-			
 
 
 	        FXMLLoader loader = new FXMLLoader();

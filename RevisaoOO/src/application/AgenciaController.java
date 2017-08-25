@@ -3,7 +3,8 @@ package application;
 import java.util.Optional;
 
 import br.edu.unoesc.revisaoOO.modelo.Agencia;
-import br.edu.unoesc.revisaoOO.modelo.SimuladorBD;
+import dao.AgenciaDao;
+import dao.DaoFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,6 +49,10 @@ public class AgenciaController {
 	private Agencia agencia;
 
 	private boolean editando;
+	
+		
+	private static AgenciaDao agenciaDao = DaoFactory.get().agenciaDao(); //ufDao interface
+	
 
 	@FXML
 	public void initialize() {
@@ -55,11 +60,15 @@ public class AgenciaController {
 		tbcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		
 				
-		tblAgencia.setItems(FXCollections.observableArrayList(SimuladorBD.getAgencias()));
+		//tblAgencia.setItems(FXCollections.observableArrayList(SimuladorBD.getAgencias()));
+		
+		tblAgencia.setItems(FXCollections.observableArrayList(agenciaDao.listar()));
+		//mostra a lsita do banco de dados
+		
 		novo();
 	}
 
-	// ação do botao salvar, vai adicionar os nomes na lista
+	// aï¿½ï¿½o do botao salvar, vai adicionar os nomes na lista
 	@FXML
 	void onSalvar(ActionEvent event) {
 
@@ -70,10 +79,11 @@ public class AgenciaController {
 
 		if (editando) {
 			// quando fizer isso esse metodo vai ser executado na Agencias e atualiza o arquivo
-			SimuladorBD.atualizarAgencias();
+		agenciaDao.alterar(agencia);
+			//SimuladorBD.atualizarAgencias();
 			tblAgencia.refresh(); //atualiza
 		} else {
-			SimuladorBD.insert(agencia);
+			agenciaDao.inserir(agencia);
 			tblAgencia.getItems().add(agencia); //adiciona na lista
 		}
 		novo();
@@ -100,7 +110,7 @@ public class AgenciaController {
 	@FXML
 	// intercepta o clipe do mouse e popula os nomes da tela
 	// lista de cliente
-	// objeto cliente já populado
+	// objeto cliente jï¿½ populado
 	
 	void onEditar(MouseEvent mouseEvent) {
 		if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED));
@@ -108,6 +118,7 @@ public class AgenciaController {
 		agencia = tblAgencia.getSelectionModel().getSelectedItem(); //carregou pra variavel agencia
 		tfNome.setText(agencia.getNome());
 		tfNumero.setText(agencia.getNumero());
+		
 
 		editando = true;
 	}
@@ -119,7 +130,7 @@ public class AgenciaController {
 				"Deseja relamente excluir?",
 				ButtonType.CANCEL, ButtonType.OK);
 		
-		//Desativando o comportamento padrao não é obrigatorio
+		//Desativando o comportamento padrao nï¿½o ï¿½ obrigatorio
 		Button okButton = (Button) alerta.getDialogPane()
 				.lookupButton(ButtonType.OK);
 		okButton.setDefaultButton(false);
@@ -130,8 +141,12 @@ public class AgenciaController {
 		if(result.get() == ButtonType.OK){
 		
 		tblAgencia.getItems().remove(agencia);
-		SimuladorBD.remover(agencia);
+		//SimuladorBD.remover(agencia);
+		agenciaDao.excluir(agencia.getCodigo());
+		
+		
 		limparCampos();
+		novo();
 		}
 	}
 

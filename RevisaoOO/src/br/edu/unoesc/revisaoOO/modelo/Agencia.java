@@ -11,6 +11,8 @@ public class Agencia implements Serializable, RenderizaCombo{
 	private static final long serialVersionUID = -1320599973517592837L;
 	private String nome;
 	private String numero;
+	private Long codigo;
+	
 	
 	
 	
@@ -64,6 +66,53 @@ public class Agencia implements Serializable, RenderizaCombo{
 		
 		return nome;
 	}
+
+
+
+	public Long getCodigo() {
+		return codigo;
+	}
+
+
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+
+
+
+	// criar com o botao direito do mouse source
+	//usado para o java saber como comparar para aparecever no combobox do cliente quando editar
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Agencia other = (Agencia) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
+	
+	
+	
+	
 	
 
 	
