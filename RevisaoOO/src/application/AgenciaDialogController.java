@@ -1,7 +1,6 @@
 package application;
 
 import br.edu.unoesc.revisaoOO.modelo.Agencia;
-import br.edu.unoesc.revisaoOO.modelo.SimuladorBD;
 import dao.AgenciaDao;
 import dao.DaoFactory;
 import javafx.event.ActionEvent;

@@ -3,7 +3,10 @@ package application;
 import br.edu.unoesc.revisaoOO.modelo.Agencia;
 import br.edu.unoesc.revisaoOO.modelo.Cliente;
 import br.edu.unoesc.revisaoOO.modelo.Conta;
-import br.edu.unoesc.revisaoOO.modelo.SimuladorBD;
+import dao.AgenciaDao;
+import dao.ClienteDao;
+import dao.ContaDao;
+import dao.DaoFactory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,15 +52,19 @@ public class ContaController {
 		private Conta conta;
 
 		private boolean editando;
+		
+		   private ClienteDao clienteDao = DaoFactory.get().clienteDao();
+		   private AgenciaDao agenciaDao = DaoFactory.get().agenciaDao();
+		   private ContaDao contaDao = DaoFactory.get().contaDao();
 
 		@FXML
 		public void initialize() {
 			tbcNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
 			tbcCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
 			
-			cbxAgencia.setItems(FXCollections.observableArrayList(SimuladorBD.getAgencias()));
-			cbxCliente.setItems(FXCollections.observableArrayList(SimuladorBD.getClientes()));
-			tblConta.setItems(FXCollections.observableArrayList(SimuladorBD.getContas()));
+			cbxAgencia.setItems(FXCollections.observableArrayList(agenciaDao.listar()));
+			cbxCliente.setItems(FXCollections.observableArrayList(clienteDao.listar()));
+			tblConta.setItems(FXCollections.observableArrayList(contaDao.listar()));
 			novo();
 		}
 		
@@ -86,7 +93,7 @@ public class ContaController {
 
 	    	
 			tblConta.getItems().remove(conta);
-			SimuladorBD.remover(conta);
+			contaDao.excluir((conta.getCodigo()));
 			limparCampos();
 			
 	    }
@@ -107,10 +114,10 @@ public class ContaController {
 			conta.setClientePreferencial(cbxCliente.getValue());
 
 			if (editando) {
-				SimuladorBD.atualizarContas();
 				tblConta.refresh(); //atualiza
+				contaDao.alterar(conta);
 			} else {
-				SimuladorBD.insert(conta);
+				contaDao.inserir(conta);
 				tblConta.getItems().add(conta); //adiciona na lista
 			}
 			novo();

@@ -21,4 +21,9 @@ public class DaoFactory {
 		return new ClienteJdbc();
 	}
 
+
+	public ContaDao contaDao() {
+		return new ContaJdbc();
+	}
+
 }

@@ -11,6 +11,7 @@ public class Conta implements Serializable {
 	private String numero;
 	private Double saldo;
 	private Double valor;
+	private Long codigo;
 	
 	private Cliente cliente;
 	
@@ -53,7 +54,7 @@ public class Conta implements Serializable {
 
         Alert dialogoOK1 = new Alert(Alert.AlertType.CONFIRMATION);
         dialogoOK1.setTitle("SUCESSO");
-        dialogoOK1.setHeaderText("DEPOSITO REALIZADO COM ÊXITO");
+        dialogoOK1.setHeaderText("DEPOSITO REALIZADO COM ï¿½XITO");
         dialogoOK1.showAndWait();
 	}
 
@@ -68,13 +69,13 @@ public class Conta implements Serializable {
 			
             Alert dialogoOK = new Alert(Alert.AlertType.CONFIRMATION);
             dialogoOK.setTitle("SUCESSO");
-            dialogoOK.setHeaderText("SAQUE REALIZADO COM ÊXITO");
+            dialogoOK.setHeaderText("SAQUE REALIZADO COM ï¿½XITO");
             dialogoOK.showAndWait();
 			return true;
 		}else{
             Alert dialogoError = new Alert(Alert.AlertType.ERROR);
             dialogoError.setTitle("ERRO");
-            dialogoError.setHeaderText("AÇÃO NÃO PERMITIDA");
+            dialogoError.setHeaderText("Aï¿½ï¿½O Nï¿½O PERMITIDA");
             dialogoError.setContentText("Saldo insuficiente");
             dialogoError.showAndWait();
 			return false;
@@ -149,6 +150,14 @@ public class Conta implements Serializable {
 
 	public void setClientePreferencial(Cliente clientePreferencial) {
 		this.clientePreferencial = clientePreferencial;
+	}
+
+	public Long getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
 
 

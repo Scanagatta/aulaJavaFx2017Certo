@@ -3,7 +3,7 @@ package br.edu.unoesc.revisaoOO.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.unoesc.revisaoOO.dao.ManipuladorArquivo;
+import bancoFalso.ManipuladorArquivo;
 
 public class SimuladorBD {
 
