@@ -74,28 +74,7 @@ public class AgenciaJdbc implements AgenciaDao {
 			}
 		}
 			
-//			--abaixo metodo generico que funciona só para 1 campo--
-			
-//			Connection con = ConexaoUtil.getCon();
-//			Scanner sc = new Scanner(System.in);
-//			System.out.println("digite o/a "+nomeCampo+" da tabela "+nomeTabela+": ");
-//			String atributo = sc.nextLine();
-//			sc.close();
-//			String insert = "insert into "+nomeTabela+" ("+nomeCampo+") values (?)"; // cadastra a
-//			// variavel do
-//			// scan no banco
-	//
-//			// novo statement para executar o insert
-//			PreparedStatement insertStmt = con.prepareStatement(insert);
-	//
-//			insertStmt.setString(1, atributo);
-//			// execução do insert
-//			insertStmt.executeUpdate();
-	//
-//			} catch (SQLException e) {
-//				// tratamento do erro de conexão com o banco
-//				e.printStackTrace();
-//			}
+
 			
 		@Override
 			public void alterar(Agencia agencia){
@@ -178,5 +157,28 @@ public class AgenciaJdbc implements AgenciaDao {
 			return null;
 
 	}
+	
+//	--abaixo metodo generico que funciona só para 1 campo--
+	
+//	Connection con = ConexaoUtil.getCon();
+//	Scanner sc = new Scanner(System.in);
+//	System.out.println("digite o/a "+nomeCampo+" da tabela "+nomeTabela+": ");
+//	String atributo = sc.nextLine();
+//	sc.close();
+//	String insert = "insert into "+nomeTabela+" ("+nomeCampo+") values (?)"; // cadastra a
+//	// variavel do
+//	// scan no banco
+//
+//	// novo statement para executar o insert
+//	PreparedStatement insertStmt = con.prepareStatement(insert);
+//
+//	insertStmt.setString(1, atributo);
+//	// execução do insert
+//	insertStmt.executeUpdate();
+//
+//	} catch (SQLException e) {
+//		// tratamento do erro de conexão com o banco
+//		e.printStackTrace();
+//	}
 	
 }
