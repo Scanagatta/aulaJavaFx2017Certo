@@ -26,6 +26,15 @@ public class MenuController {
     @FXML
     private MenuItem miMovimentos;
     
+    @FXML
+    private MenuItem miRelatorio;
+
+
+    @FXML
+    void onRelatorio(ActionEvent event) {
+    	
+    }
+    
 
    
     
