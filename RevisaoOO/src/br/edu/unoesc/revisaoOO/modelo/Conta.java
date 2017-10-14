@@ -7,7 +7,7 @@ import javafx.scene.control.Alert;
 public class Conta implements Serializable {
 
 
-	private static final long serialVersionUID = -681462113597700012L;
+	//private static final long serialVersionUID = -681462113597700012L;
 	private String numero;
 	private Double saldo;
 	private Double valor;
