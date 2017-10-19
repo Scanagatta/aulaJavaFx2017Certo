@@ -1,8 +1,11 @@
 package application;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Optional;
 
 import br.edu.unoesc.revisaoOO.modelo.Agencia;
+import br.edu.unoesc.revisaoOO.modelo.ConexaoUtil;
 import dao.AgenciaDao;
 import dao.DaoFactory;
 import javafx.collections.FXCollections;
@@ -17,6 +20,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class AgenciaController {
 
@@ -31,11 +39,11 @@ public class AgenciaController {
 
 	@FXML
 	private TableView<Agencia> tblAgencia;
-	
+
 	@FXML
 	// lista tabela
 	private TableColumn<Agencia, Number> tbcNumero;
-	
+
 	@FXML
 	private TableColumn<Agencia, String> tbcNome;
 
@@ -49,45 +57,62 @@ public class AgenciaController {
 	private Agencia agencia;
 
 	private boolean editando;
-	
-		
-	private static AgenciaDao agenciaDao = DaoFactory.get().agenciaDao(); //ufDao interface
-	
+
+	private static AgenciaDao agenciaDao = DaoFactory.get().agenciaDao(); // ufDao
+																			// interface
 
 	@FXML
 	public void initialize() {
 		tbcNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
 		tbcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-		
-				
-		//tblAgencia.setItems(FXCollections.observableArrayList(SimuladorBD.getAgencias()));
-		
+
+		// tblAgencia.setItems(FXCollections.observableArrayList(SimuladorBD.getAgencias()));
+
 		tblAgencia.setItems(FXCollections.observableArrayList(agenciaDao.listar()));
-		//mostra a lsita do banco de dados
-		
+		// mostra a lsita do banco de dados
+
 		novo();
+	}
+
+	@FXML
+	private Button btnRelatorio;
+
+	@FXML
+	void onReports(ActionEvent event) {
+
+		URL url = getClass().getResource("/RelatorioUF.jasper");
+
+		try {
+			//JasperPrint print = JasperFillManager.fillReport(url.getPath(), null, ConexaoUtil.getCon());
+			JasperPrint print = JasperFillManager.fillReport("c:/RelatorioUF.jasper", null, ConexaoUtil.getCon());
+
+			JasperViewer.viewReport(print);
+			JasperExportManager.exportReportToPdfFile(print, "relatorio.pdf");
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// a��o do botao salvar, vai adicionar os nomes na lista
 	@FXML
 	void onSalvar(ActionEvent event) {
 
-
 		// para dar new precisa do construtor vazio no cliente
 		agencia.setNome(tfNome.getText());
 		agencia.setNumero(tfNumero.getText());
 
 		if (editando) {
-			// quando fizer isso esse metodo vai ser executado na Agencias e atualiza o arquivo
-		agenciaDao.alterar(agencia);
-			//SimuladorBD.atualizarAgencias();
-			tblAgencia.refresh(); //atualiza
+			// quando fizer isso esse metodo vai ser executado na Agencias e
+			// atualiza o arquivo
+			agenciaDao.alterar(agencia);
+			// SimuladorBD.atualizarAgencias();
+			tblAgencia.refresh(); // atualiza
 		} else {
 			agenciaDao.inserir(agencia);
-			tblAgencia.getItems().add(agencia); //adiciona na lista
+			tblAgencia.getItems().add(agencia); // adiciona na lista
 		}
 		novo();
-		
+
 	}
 
 	private void novo() {
@@ -111,42 +136,41 @@ public class AgenciaController {
 	// intercepta o clipe do mouse e popula os nomes da tela
 	// lista de cliente
 	// objeto cliente j� populado
-	
+
 	void onEditar(MouseEvent mouseEvent) {
-		if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED));
-		
-		agencia = tblAgencia.getSelectionModel().getSelectedItem(); //carregou pra variavel agencia
+		if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED))
+			;
+
+		agencia = tblAgencia.getSelectionModel().getSelectedItem(); // carregou
+																	// pra
+																	// variavel
+																	// agencia
 		tfNome.setText(agencia.getNome());
 		tfNumero.setText(agencia.getNumero());
-		
 
 		editando = true;
 	}
 
 	@FXML
 	void onExcluir(ActionEvent MouseEvent) {
-		
-		Alert alerta = new Alert(AlertType.CONFIRMATION,
-				"Deseja relamente excluir?",
-				ButtonType.CANCEL, ButtonType.OK);
-		
-		//Desativando o comportamento padrao n�o � obrigatorio
-		Button okButton = (Button) alerta.getDialogPane()
-				.lookupButton(ButtonType.OK);
+
+		Alert alerta = new Alert(AlertType.CONFIRMATION, "Deseja relamente excluir?", ButtonType.CANCEL, ButtonType.OK);
+
+		// Desativando o comportamento padrao n�o � obrigatorio
+		Button okButton = (Button) alerta.getDialogPane().lookupButton(ButtonType.OK);
 		okButton.setDefaultButton(false);
-		
-		//optional do java 8 executa o show e fica aguardando o click do botao
+
+		// optional do java 8 executa o show e fica aguardando o click do botao
 		final Optional<ButtonType> result = alerta.showAndWait();
-		//se o click foi no ok executa os comandos abaixo
-		if(result.get() == ButtonType.OK){
-		
-		tblAgencia.getItems().remove(agencia);
-		//SimuladorBD.remover(agencia);
-		agenciaDao.excluir(agencia.getCodigo());
-		
-		
-		limparCampos();
-		novo();
+		// se o click foi no ok executa os comandos abaixo
+		if (result.get() == ButtonType.OK) {
+
+			tblAgencia.getItems().remove(agencia);
+			// SimuladorBD.remover(agencia);
+			agenciaDao.excluir(agencia.getCodigo());
+
+			limparCampos();
+			novo();
 		}
 	}
 

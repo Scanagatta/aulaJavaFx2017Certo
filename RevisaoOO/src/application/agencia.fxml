@@ -31,6 +31,7 @@
               </columns>
             </TableView>
             <Button fx:id="btnExcluir" layoutX="239.0" layoutY="167.0" mnemonicParsing="false" onAction="#onExcluir" text="Excluir" textFill="#ea0808" />
+            <Button fx:id="btnRelatorio" layoutX="309.0" layoutY="167.0" mnemonicParsing="false" onAction="#onReports" text="Relatorio UF" />
          </children>
       </Pane>
    </children>

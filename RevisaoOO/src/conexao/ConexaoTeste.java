@@ -18,7 +18,7 @@ public class ConexaoTeste implements Conexao{
 		String url = "jdbc:mysql://localhost:3306/banco_test"; // caminho q o jdbc //
 															// espera
 		String username = "root";
-		String password = "ctg4662011";
+		String password = "joao1234";
 
 		// vai até o banco de dados e cria uma conexão
 		try {
