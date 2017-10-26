@@ -4,11 +4,13 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value="amRiYy51ZiBBUyAsMzksMTAyLGZmOWU4ZGYwLTZmY2ItNGZhOS1hMDVhLTMxZDg2ZWU0MWIxYjs="/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="387"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="601"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mysql1-jdbc"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<parameter name="nomeUf" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT jdbc.uf.codigo,
-	jdbc.uf.nome
-FROM jdbc.uf]]>
+		<![CDATA[SELECT uf.codigo,
+	uf.nome
+FROM uf
+where uf.nome like $P{nomeUf}]]>
 	</queryString>
 	<field name="codigo" class="java.lang.Integer"/>
 	<field name="nome" class="java.lang.String"/>
@@ -16,21 +18,7 @@ FROM jdbc.uf]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="120" splitType="Stretch">
-			<staticText>
-				<reportElement x="140" y="0" width="420" height="108" uuid="e6a40e50-faca-4c04-9c59-142a5e3dd810">
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-				</reportElement>
-				<textElement>
-					<font fontName="MINECRAFT PE" size="40"/>
-				</textElement>
-				<text><![CDATA[Ready to Bus]]></text>
-			</staticText>
-			<image>
-				<reportElement x="20" y="0" width="140" height="94" uuid="0282e954-574c-4f06-9be0-d5dcd76415fb"/>
-				<imageExpression><![CDATA["C:/Users/João V. Scanagatta/Desktop/projeto Ready to bus!/imagens/busao.png"]]></imageExpression>
-			</image>
-		</band>
+		<band height="120" splitType="Stretch"/>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>

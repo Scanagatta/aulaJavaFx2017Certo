@@ -32,6 +32,8 @@
             </TableView>
             <Button fx:id="btnExcluir" layoutX="239.0" layoutY="167.0" mnemonicParsing="false" onAction="#onExcluir" text="Excluir" textFill="#ea0808" />
             <Button fx:id="btnRelatorio" layoutX="309.0" layoutY="167.0" mnemonicParsing="false" onAction="#onReports" text="Relatorio UF" />
+            <Button fx:id="btnRelatorio1" layoutX="309.0" layoutY="202.0" mnemonicParsing="false" onAction="#onRelatorioAgencia" text="Relatorio agencia" />
+            <Button fx:id="btnRelatorio2" layoutX="309.0" layoutY="129.0" mnemonicParsing="false" onAction="#onRelatorioAgenciaObjeto" text="Relatorio agencia objetos" />
          </children>
       </Pane>
    </children>
