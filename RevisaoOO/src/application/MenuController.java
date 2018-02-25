@@ -32,6 +32,16 @@ public class MenuController {
 
     @FXML
     void onRelatorio(ActionEvent event) {
+    	FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(getClass().getResource("relatorios.fxml"));
+    	try{
+    		AnchorPane agenciaView = (AnchorPane) loader.load();
+    		bpPrincipal.setCenter(agenciaView);
+    		
+    	} catch (IOException e1) {
+    		e1.printStackTrace();
+    	}
+
     	
     }
     
