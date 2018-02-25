@@ -10,17 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManipuladorArquivo {
-	
+
 	/**
 	 * 
 	 * Serializabla objetos de uma lista ce um arquivo
 	 * 
 	 * @param dados
-	 * 		List extends serializable
+	 *            List extends serializable
 	 * @param pathFile
-	 * 		String caminho do arquivo que deseja gravar
+	 *            String caminho do arquivo que deseja gravar
 	 */
-	
+
 	public void gravar(List<? extends Serializable> dados, String pathFile) {
 		try {
 			// cria o arquivo que sera utilizado
@@ -29,7 +29,7 @@ public class ManipuladorArquivo {
 			ObjectOutputStream out = new ObjectOutputStream(file);
 			// escreve os objetos dentro do arquivo
 			out.writeObject(dados);
-			//fecha o manipular do arquivo
+			// fecha o manipular do arquivo
 			out.close();
 			// fecha o arqivo
 			file.close();
@@ -38,15 +38,15 @@ public class ManipuladorArquivo {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public <T extends Serializable> List<T> recuperar(String pathFile) {
 		List<T> retorno = new ArrayList<>();
 		try {
-			//Cria ou encontra arquivo
+			// Cria ou encontra arquivo
 			FileInputStream file = new FileInputStream(pathFile);
-			//Manipulador de arquivo
+			// Manipulador de arquivo
 			ObjectInputStream ois = new ObjectInputStream(file);
-			//Recupera do arquivos os objetos serializados.
+			// Recupera do arquivos os objetos serializados.
 			retorno = (List) ois.readObject();
 			ois.close();
 			file.close();
@@ -56,6 +56,6 @@ public class ManipuladorArquivo {
 			c.printStackTrace();
 		}
 		return retorno;
-}
+	}
 
 }

@@ -22,23 +22,24 @@ public class SimuladorBD {
 		manipuladorArquivo = new ManipuladorArquivo();
 	}
 
-	public static void atualizarAgencias(){
+	public static void atualizarAgencias() {
 		manipuladorArquivo.gravar(agencias, "agencias.ser");
 	}
-	
-	public static void atualizarClientes(){
+
+	public static void atualizarClientes() {
 		manipuladorArquivo.gravar(clientes, "clientes.ser");
 	}
-	
-	public static void atualizarContas(){
+
+	public static void atualizarContas() {
 		manipuladorArquivo.gravar(contas, "contas.ser");
 	}
-	public static void atualizarMovimentos(){
+
+	public static void atualizarMovimentos() {
 		manipuladorArquivo.gravar(movimentos, "movimentos.ser");
 	}
-	
+
 	/////////////////////////////////////
-	
+
 	public static void insert(Conta conta) {
 		contas.add(conta);
 		atualizarContas();
@@ -64,8 +65,6 @@ public class SimuladorBD {
 		atualizarAgencias();
 
 	}
-	
-	
 
 	public static void remover(Agencia agencia) {
 		agencias.remove(agencia);
@@ -113,7 +112,5 @@ public class SimuladorBD {
 		movimentos = manipuladorArquivo.recuperar("movimentos.ser");
 		return movimentos;
 	}
-
-
 
 }

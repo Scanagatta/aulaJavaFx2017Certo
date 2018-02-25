@@ -1,7 +1,5 @@
 package br.edu.unoesc.componente;
 
-
-	public interface RenderizaCombo {
-		String getText();
-	}
-
+public interface RenderizaCombo {
+	String getText();
+}

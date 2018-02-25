@@ -89,9 +89,10 @@ public class AgenciaController {
 
 		try {
 
-			Map<String, Object> parametros = new HashMap<>(); // passa parametros
+			Map<String, Object> parametros = new HashMap<>(); // passa
+																// parametros
 			parametros.put("nomeAgencia", "%sa%");
-			
+
 			JasperPrint print = JasperFillManager.fillReport(url.getPath(), null, ConexaoUtil.getCon());
 			// JasperPrint print =
 			// JasperFillManager.fillReport("c:/RelatorioUF.jasper", parametros,
@@ -103,7 +104,7 @@ public class AgenciaController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	private Button btnRelatorio2;
 
@@ -114,11 +115,12 @@ public class AgenciaController {
 		try {
 
 			// aqui ele pega dos objetos e da classe AgenciaDao
-			Map<String, Object> parametros = new HashMap<>(); // passa parametros
+			Map<String, Object> parametros = new HashMap<>(); // passa
+																// parametros
 			parametros.put("nomeAgencia", "%sa%");
-			
+
 			JRDataSource dataSource = new JRBeanCollectionDataSource(agenciaDao.listar());
-			
+
 			JasperPrint print = JasperFillManager.fillReport(url.getPath(), null, dataSource);
 			// JasperPrint print =
 			// JasperFillManager.fillReport("c:/RelatorioUF.jasper", parametros,

@@ -15,8 +15,8 @@ public class StringConverterBean<T extends RenderizaCombo> extends StringConvert
 
 	@Override
 	public T fromString(String string) {
-		//se for necessario converter de uma string para um objeto. 
-		//Não vai ser preciso no nosso caso
+		// se for necessario converter de uma string para um objeto.
+		// Nï¿½o vai ser preciso no nosso caso
 		return null;
 	}
 
